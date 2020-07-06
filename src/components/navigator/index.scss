@@ -1,0 +1,39 @@
+.navigator {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  width: 100vw;
+  height: 100vh;
+
+.navigator-box{
+  background-color: #aaaaaa;
+  width: 80vw;
+  height: 45vw;
+  position: relative;
+
+  .navigator-img {
+    width: 80vw;
+    height: 45vw;
+    position: absolute;
+    top:0;
+    left: 0;
+    z-index: 0;
+  }
+
+  .navigator-controller {
+    width: 80vw;
+    height: 45vw;
+    position: absolute;
+    top:0;
+    left: 0;
+    z-index: 1;
+    cursor: url(./cursor.png), pointer;
+  }
+}
+
+
+  img {
+    
+    
+  }
+}

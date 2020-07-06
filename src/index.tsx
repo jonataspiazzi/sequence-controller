@@ -1,11 +1,12 @@
 import React from 'react';
 import ReactDOM from 'react-dom';
+import Navigator from './components/navigator';
 import './index.scss';
 import * as serviceWorker from './serviceWorker';
 
 ReactDOM.render(
   <React.StrictMode>
-
+    <Navigator />
   </React.StrictMode>,
   document.getElementById('root')
 );
