@@ -1,86 +1,88 @@
-const MOVEMENT_TICK = 5;
+import CameraControl from "./cameraControl";
+import ImageLoader from "./loader";
+import LoadingBar from "./loadingBar";
+
+export interface NativeNavigatorConfig {
+  frameElement?: HTMLImageElement;
+  controllerElement?: HTMLElement;
+  loadingElement?: HTMLElement;
+  frames?: string[];
+  tick?: number;
+  useDynamicTick?: boolean;
+}
 
 export default class NativeNavigator {
-  private isMoving: boolean;
-  private currentX: number;
-  private images: string[];
-  private currentImage: string;
-  private currentIndex: number;
+  private element: HTMLImageElement;
+  private control: CameraControl;
+  private loader: ImageLoader;
+  private loadingBar: LoadingBar;
+  private frames: string[];
+  private frameIndex: number;
+  private movementEnabled: boolean = false;
 
-  constructor(private img: HTMLImageElement, private controller: HTMLElement) {
-    this.images = this.imageListGenerator();
-    this.isMoving = false;
-    this.currentX = 0;
-    this.currentIndex = 0;
-    this.currentImage = this.images[this.currentIndex];
-    this.img.addEventListener('load', this.imageLoaded.bind(this));
-    this.controller.addEventListener('mousedown', this.mouseDown.bind(this));
-    this.controller.addEventListener('mousemove', this.mouseMove.bind(this));
-    this.controller.addEventListener('mouseup', this.mouseUp.bind(this));
-    this.imageLoaded();
+  constructor(config: NativeNavigatorConfig) {
+    this.element = config.frameElement;
+
+    this.loader = new ImageLoader();
+
+    this.control = new CameraControl({
+      element: config.controllerElement,
+      frameCount: config.frames.length,
+      tick: config.tick,
+      useDynamicTick: config.useDynamicTick
+    });
+
+    this.loadingBar = new LoadingBar(config.loadingElement);
+
+    this.setup(config);
   }
 
-  imageListGenerator() {
-    const imgs = [];
+  private setup(config: NativeNavigatorConfig) {
+    this.loader.addEventListener('finished', frames => {
+      console.log('finished was called');
+      this.frames = frames;
+      this.movementEnabled = true;
+      this.loadingBar.setVisibility(false);
+    });
 
-    for (let i = 0; i <= 100; i++) {
-      imgs.push(require(`./render/_0${i.toString().padStart(3, '0')}.jpg`));
-    }
+    this.loader.addEventListener('firstFrame', frame => this.element.src = frame);
+    this.loader.addEventListener('progress', p => this.loadingBar.setProgress(p));
 
-    return imgs;
+    this.loader.load(config.frames);
+
+    this.control.addEventListener('rotate', this.rotate.bind(this));
   }
 
-
-  mouseDown(e: MouseEvent) {
-    this.isMoving = true;
-    this.currentX = e.offsetX;
+  onFirstFrame(frame: string) {
+    this.element.src = frame;
   }
 
-  mouseMove(e: MouseEvent) {
-    if (!this.isMoving) return;
-
-    const offset = e.offsetX - this.currentX;
-
-    if (Math.abs(offset) > MOVEMENT_TICK) {
-
-      if (offset > 0) {
-        this.currentX += MOVEMENT_TICK;
-        this.goToNext();
-      }
-
-      if (offset < 0) {
-        this.currentX -= MOVEMENT_TICK;
-        this.goToPrevious();
-      }
-    }
+  loadFrames(frames: string[]) {
+    this.frames = frames;
   }
 
-  mouseUp(e: MouseEvent) {
-    this.isMoving = false;
-  }
-
-  imageLoaded() {
+  rotate(x: number) {
+    if (x > 0) this.goToPrevious();
+    else if (x < 0) this.goToNext();
   }
 
   goToPrevious() {
-    if (this.currentIndex === 0) return;
+    if (this.frameIndex === 0) return;
 
-    this.currentIndex--;
-    this.currentImage = this.images[this.currentIndex];
-    this.img.src = this.currentImage;
+    this.frameIndex--;
+    this.element.src = this.frames[this.frameIndex];
   }
 
   goToNext() {
-    if (this.currentIndex === this.images.length - 1) return;
+    if (this.frameIndex === this.frames.length - 1) return;
 
-    this.currentIndex++;
-    this.currentImage = this.images[this.currentIndex];
-    this.img.src = this.currentImage;
+    this.frameIndex++;
+    this.element.src = this.frames[this.frameIndex];
   }
 }
 
-export function makeNativeNavigator(img: HTMLImageElement, controller: HTMLElement) {
-  if (!img || !controller) return;
+export function makeNativeNavigator(config: NativeNavigatorConfig) {
+  if (!config || !config.frameElement || !config.controllerElement || !config.frames) return;
 
-  new NativeNavigator(img, controller);
+  new NativeNavigator(config);
 }
