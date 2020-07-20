@@ -1,1 +1,1 @@
-const MINIMUM_PROGRESS_VALUE = 4;
+export const SPLASH_PROGRESS_SEGMENT = .03;

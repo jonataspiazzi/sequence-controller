@@ -1,5 +1,6 @@
-export interface SequenceInfo {
+export interface AssetInfo {
   dataUrl: string;
-  source?: string;
   estimatedSize: number;
+  type: string;
+  source?: string;
 }

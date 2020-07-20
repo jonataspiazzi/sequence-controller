@@ -1,4 +1,4 @@
-interface Elements {
+export interface Elements {
   splash: HTMLElement;
   splashImg: HTMLImageElement;
   loading: HTMLElement;
@@ -14,14 +14,20 @@ const queries: { [K in Extract<keyof Elements, string>]: string } = {
   loadingBar: '.loading .progress .bar'
 }
 
-export default class HtmlElements {
-  private elements = {} as Elements;
+export function createElements(element: HTMLElement): Elements {
+  const original = {} as Elements;
+  const dynamic = {} as Elements;
 
-  constructor(private element: HTMLElement) {
+  for (let prop in queries) {
+    const name = prop as keyof Elements;
+
+    Object.defineProperty(dynamic, name, {
+      enumerable: true,
+      get: () => {
+        return original[name] || (original[name] = element.querySelector(queries[name]))
+      }
+    });
   }
 
-  get<K extends keyof Elements>(elementName: K): Elements[K] {
-    return this.elements[elementName] ||
-      (this.elements[elementName] = this.element.querySelector(queries[elementName]));
-  }
+  return dynamic;
 }

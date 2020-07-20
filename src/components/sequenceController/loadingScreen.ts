@@ -1,41 +1,66 @@
-import { SequenceInfo } from "./types";
-import HtmlElements from "./htmlElements";
-import SequenceLoader from "./sequenceLoader";
+import { AssetInfo } from "./types";
+import { Elements } from "./htmlElements";
+import AssetsLoader from "./assetsLoader";
+import { SPLASH_PROGRESS_SEGMENT } from "./config";
 
 export default class LoadingScreen {
-  private loader: SequenceLoader;
+  private loader: AssetsLoader;
 
-  constructor(private html: HtmlElements, private splashUrl: string, infos: SequenceInfo[]) {
-    this.loader = new SequenceLoader(infos);
+  constructor(private html: Elements, private splashUrl: string, infos: AssetInfo[]) {
+    this.loader = new AssetsLoader(infos);
   }
 
-  load() {
-    this.html.get('splashImg').src = this.splashUrl;
-    this.setProgress(.03);
+  async load() {
+    await this.loadSplash();
+    await this.loadData();
+  }
 
-    this.loader.addEventListener('progress', e => {
-      this.setProgress(e.progress);
+  private async loadSplash() {
+    return new Promise((resolve, reject) => {
+      this.setProgress(SPLASH_PROGRESS_SEGMENT);
+      this.setVisibility(true);
+
+      this.html.splashImg.addEventListener('load', e => {
+        resolve();
+      });
+
+      this.html.splashImg.addEventListener('error', e => {
+        // TODO: Do something of fail
+        reject();
+      });
+
+      this.html.splashImg.src = this.splashUrl;
     });
+  }
 
-    this.loader.addEventListener('load', e => {
-      this.setVisibility(false);
-    })
+  private async loadData() {
+    return new Promise((resolve, reject) => {
+      this.loader.addEventListener('progress', e => {
+        this.setProgress(e.progress);
+      });
 
-    this.loader.addEventListener('error', e => {
-      // TODO: need to handle download error.
+      this.loader.addEventListener('load', e => {
+        this.setVisibility(false);
+        resolve();
+      })
+
+      this.loader.addEventListener('error', e => {
+        // TODO: Do something of fail
+        reject();
+      });
+
+      this.loader.load();
     });
-
-    this.loader.load();
   }
 
   private setProgress(progress: number) {
     const percentage = progress * 100;
 
-    this.html.get('loadingPercentage').innerHTML = percentage.toFixed(2);
-    this.html.get('loadingBar').style.width = `${Math.round(percentage)}%`;
+    this.html.loadingPercentage.innerHTML = percentage.toFixed(2);
+    this.html.loadingBar.style.width = `${Math.round(percentage)}%`;
   }
 
   private setVisibility(visible: boolean) {
-    this.html.get('loading').style.display = visible ? 'flex' : 'none';
+    this.html.loading.style.display = visible ? 'flex' : 'none';
   }
 }
