@@ -56,20 +56,8 @@ export default class AssetsLoader extends Notifier<AssetsLoaderEventMap> {
       }
 
       await new Promise(resolve => {
-        const onSuccess = (priority: number) => {
-          this.removeEventListener('load', onSuccess);
-          this.removeEventListener('error', onError);
-          resolve();
-        }
-
-        const onError = (message: string) => {
-          this.removeEventListener('load', onSuccess);
-          this.removeEventListener('error', onError);
-          resolve();
-        }
-
-        this.addEventListener('load', onSuccess);
-        this.addEventListener('error', onError);
+        this.addEventListenerOnce('load', resolve);
+        this.addEventListenerOnce('error', resolve);
       });
     }
   }
@@ -87,7 +75,7 @@ export default class AssetsLoader extends Notifier<AssetsLoaderEventMap> {
     info.request.addEventListener('progress', e => {
       info.loaded = e.loaded;
       info.total = e.total;
-      this.onProgress(info);
+      this.onProgress(info, 'progress');
     });
 
     info.request.addEventListener('load', e => {
@@ -95,7 +83,7 @@ export default class AssetsLoader extends Notifier<AssetsLoaderEventMap> {
 
       info.asset.source = URL.createObjectURL(info.request.response);
 
-      this.onProgress(info);
+      this.onProgress(info, 'load');
     });
 
     info.request.addEventListener('error', e => {
@@ -118,7 +106,7 @@ export default class AssetsLoader extends Notifier<AssetsLoaderEventMap> {
     }
   }
 
-  private onProgress(targetInfo: AssetLoaderInfo) {
+  private onProgress(targetInfo: AssetLoaderInfo, caller: 'progress' | 'load') {
     const loaded = this.priorities.map(p => 0);
     const total = [...loaded];
     this.loaded = 0;
@@ -134,15 +122,11 @@ export default class AssetsLoader extends Notifier<AssetsLoaderEventMap> {
     const progress = loaded.map((l, i) => l / total[i]);
     this.progress = this.loaded / this.total;
 
-    if (this.progress === 1) {
-      this.onLoad(0);
-    }
-
     if (this.lastProgress >= this.progress) {
       this.progress = this.lastProgress;
     }
 
-    if (progress[targetInfo.asset.priority] === 1) {
+    if (progress[targetInfo.asset.priority] === 1 && caller === 'load') {
       this.onLoad(targetInfo.asset.priority);
     }
 
