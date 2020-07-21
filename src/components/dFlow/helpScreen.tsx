@@ -1,5 +1,6 @@
 import React, { useEffect, useState, ReactNode, useRef } from 'react';
 import { ImageInfo } from './assetInfo';
+import { useAssetSource } from './hooks';
 
 export interface HelpScreenProps {
   asset: ImageInfo;
@@ -8,15 +9,11 @@ export interface HelpScreenProps {
 }
 
 export default function HelpScreen(props: HelpScreenProps) {
-  const [img, setImg] = useState<string>(null);
+  const [img] = useAssetSource(props.asset);
   const [visible, setVisible] = useState(true);
   const rootRef = useRef<HTMLDivElement>(null);
 
   useEffect(() => {
-    props.asset.addEventListener('load', () => {
-      setImg(props.asset.source);
-    });
-
     rootRef.current.querySelector('.ok-button').addEventListener('click', e => {
       setVisible(false);
 
@@ -27,8 +24,8 @@ export default function HelpScreen(props: HelpScreenProps) {
   }, []);
 
   return (
-    <div className={`help ${visible ? '' : 'hide'}`} ref={rootRef}>
-      <img alt="" src={img} />
+    <div className={`screen help ${visible ? '' : 'hide'}`} ref={rootRef}>
+      <img className="background" alt="" src={img} />
       {props.children}
     </div>
   );

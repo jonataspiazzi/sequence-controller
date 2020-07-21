@@ -64,24 +64,39 @@
     img { @include full-box(); }
   }
 
-  .help {
+  .screen {
     @include sequencer-child(stretch, stretch);
     transition: opacity .2s;
-   
+
     &.hide {
       opacity: 0;
     }
 
-    img { 
-      @include full-box(); 
+    .background { 
+      @include full-box();
       @include position-top-left();
-     }
+    }
+
+    .overlay {
+      @include full-box();
+      @include position-top-left();
+      opacity: 0;
+      transition: opacity .3s;
+
+      &.show {
+        opacity: 1;
+      }
+
+      img {
+        @include full-box();
+      }
+    }
 
     svg {
       @include full-box();
       @include position-top-left();
 
-      .ok-button {
+      polygon, rect, path {
         fill: rgba(0,0,0,.01);
         cursor: pointer;
       }
