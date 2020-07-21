@@ -10,7 +10,7 @@ export interface LoadingScreenProps {
 
 export default function LoadingScreen(props: LoadingScreenProps) {
   const [percentage, setPercentage] = useState(MINIMUM_PROGRESS_VALUE_DISPLAY * 100);
-  const [visibility, setVisibility] = useState(true);
+  const [visible, setVisible] = useState(true);
 
   useEffect(() => {
     const loader = new AssetsLoader(props.assets);
@@ -18,7 +18,7 @@ export default function LoadingScreen(props: LoadingScreenProps) {
     if (typeof props.onLoad !== 'function') return;
 
     loader.addEventListener('load', priority => {
-      if (priority === 0) setVisibility(false);
+      if (priority === 0) setVisible(false);
       props.onLoad(priority);
     });
 
@@ -34,7 +34,7 @@ export default function LoadingScreen(props: LoadingScreenProps) {
   }, []);
 
   return (
-    <div className="loading" style={{ display: visibility ? 'flex' : 'none' }}>
+    <div className="loading" style={{ display: visible ? 'flex' : 'none' }}>
       <p className="status">Carregando a sua experiência virtual online. <span className="percentage">{percentage.toFixed(2)}</span>%</p>
       <div className="progress">
         <div className="bar" style={{ width: `${Math.round(percentage)}%` }}>

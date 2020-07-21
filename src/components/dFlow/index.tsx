@@ -1,10 +1,11 @@
-import React from 'react';
+import React, { ReactNode } from 'react';
 import { AssetInfo } from "./assetInfo";
 import LoadingScreen from "./loadingScreen";
 import './index.scss';
 
 export interface DFlowProps {
   assets: AssetInfo[];
+  children: ReactNode;
 }
 
 export default function DFlow(props: DFlowProps) {
@@ -15,9 +16,7 @@ export default function DFlow(props: DFlowProps) {
   return (
     <div className="container">
       <div className="sequencer">
-        <div className="splash">
-          <img alt="" />
-        </div>
+        {props.children}
         <LoadingScreen assets={props.assets} onLoad={onLoad} />
       </div>
     </div>

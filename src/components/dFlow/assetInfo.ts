@@ -1,18 +1,36 @@
-export class AssetInfo {
+import Notifier from "./notifier";
+
+export interface AssetInfoMap {
+  load: () => void;
+}
+
+export class AssetInfo extends Notifier<AssetInfoMap> {
   dataUrl: string;
   estimatedSize: number;
   type: string;
   loaded: boolean;
   priority: number;
-  source: string;
+  private __source: string;
 
   constructor(dataUrl: string, estimatedSize: number, type: string, priority: number = 0) {
+    super();
     this.dataUrl = dataUrl;
     this.estimatedSize = estimatedSize;
     this.type = type;
     this.priority = priority;
     this.loaded = false;
-    this.source = null;
+    this.__source = null;
+  }
+
+  get source() {
+    return this.__source;
+  }
+
+  set source(src: string) {
+    this.__source = src;
+    this.loaded = !!src;
+
+    if (this.loaded) this.dispatchEvent('load');
   }
 }
 
