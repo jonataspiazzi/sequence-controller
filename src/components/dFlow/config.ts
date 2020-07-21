@@ -1,0 +1,1 @@
+export const MINIMUM_PROGRESS_VALUE_DISPLAY = .01;

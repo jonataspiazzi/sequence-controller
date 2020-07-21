@@ -1,1 +1,0 @@
-export const SPLASH_PROGRESS_SEGMENT = .03;
