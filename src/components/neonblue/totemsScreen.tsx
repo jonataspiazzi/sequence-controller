@@ -1,10 +1,7 @@
 import React, { useState } from 'react';
-import { AssetInfo } from '../dFlow/assetInfo';
-import { assets, assetsList } from './assets/config';
+import { assets } from './assets/config';
 import { useAssetSource } from '../dFlow/hooks';
 import Overlay from '../dFlow/overlay';
-import { assert } from 'console';
-import './totemsScreen.scss';
 
 export type ScreenName = 'camera' | 'promoter' | 'notebook';
 
@@ -22,8 +19,6 @@ export default function TotemsScreen(props: TotemsScreenProps) {
   const [visible, setVisible] = useState(true);
 
   function mouseOn(totem: ScreenName, on: boolean) {
-    console.log('mouseOn ', totem, on);
-
     switch (totem) {
       case 'camera': setHighlightCamera(on); break;
       case 'promoter': setHighlightPromoter(on); break;
@@ -41,9 +36,9 @@ export default function TotemsScreen(props: TotemsScreenProps) {
   return (
     <div className={`screen totem-screen ${visible ? '' : 'hide'}`}>
       <img className="background" alt="" src={bg} />
-      <Overlay asset={assets.layerCameraHighlight} visible={highlightCamera} />
-      <Overlay asset={assets.layerPromoterHighlight} visible={highlightPromoter} />
-      <Overlay asset={assets.layerNotebookHighlight} visible={highlightNotebook} />
+      <Overlay asset={assets.layerTotemCameraHighlight} visible={highlightCamera} />
+      <Overlay asset={assets.layerTotemPromoterHighlight} visible={highlightPromoter} />
+      <Overlay asset={assets.layerTotemNotebookHighlight} visible={highlightNotebook} />
       <svg xmlns="http://www.w3.org/2000/svg" width="1280" height="720" viewBox="0 0 1280 720">
         <polygon points="1280 382.59 853.34 382.59 722 251.25 722 0 1280 0 1280 382.59" style={{ cursor: `url(${cursorRight}), auto` }} />
         <polygon points="0 382.59 426.66 382.59 558 251.25 558 0 0 0 0 382.59" style={{ cursor: `url(${cursorLeft}), auto` }} />

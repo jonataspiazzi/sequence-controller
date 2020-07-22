@@ -12,9 +12,10 @@ export const assets = {
   cursorLeft: new ImageInfo(require('./cursor-arrow-left.png'), 8503),
   cursorRight: new ImageInfo(require('./cursor-arrow-right.png'), 20192),
   layerHelp: new ImageInfo(require('./help-layer.png'), 124389),
-  layerCameraHighlight: new ImageInfo(require('./overlay-camera.png'), 72825),
-  layerNotebookHighlight: new ImageInfo(require('./overlay-notebook.png'), 74385),
-  layerPromoterHighlight: new ImageInfo(require('./overlay-promoter.png'), 62118)
+  layerTotemCameraHighlight: new ImageInfo(require('./overlay-camera.png'), 72825),
+  layerTotemPromoterHighlight: new ImageInfo(require('./overlay-promoter.png'), 62118),
+  layerTotemNotebookHighlight: new ImageInfo(require('./overlay-notebook.png'), 74385),
+  layerCameraHelp: new ImageInfo(require('./camera-help-layer.png'), 129118),
 };
 
 export const assetsList: AssetInfo[] = Object.getOwnPropertyNames(assets).map(prop => (assets as any)[prop]);

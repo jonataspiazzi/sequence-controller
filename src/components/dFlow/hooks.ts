@@ -10,7 +10,7 @@ export function useAssetSource(asset: AssetInfo) {
       return;
     }
 
-    asset.addEventListener('load', () => {
+    asset.addEventListenerOnce('load', () => {
       setSource(asset.source);
     });
   }, []);
