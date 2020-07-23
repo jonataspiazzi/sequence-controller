@@ -39,7 +39,7 @@ export default function TotemsScreen(props: TotemsScreenProps) {
       <Overlay asset={assets.layerTotemCameraHighlight} visible={highlightCamera} />
       <Overlay asset={assets.layerTotemPromoterHighlight} visible={highlightPromoter} />
       <Overlay asset={assets.layerTotemNotebookHighlight} visible={highlightNotebook} />
-      <svg xmlns="http://www.w3.org/2000/svg" width="1280" height="720" viewBox="0 0 1280 720">
+      <svg viewBox="0 0 1280 720" className="action-layer">
         <polygon points="1280 382.59 853.34 382.59 722 251.25 722 0 1280 0 1280 382.59" style={{ cursor: `url(${cursorRight}), auto` }} />
         <polygon points="0 382.59 426.66 382.59 558 251.25 558 0 0 0 0 382.59" style={{ cursor: `url(${cursorLeft}), auto` }} />
         <path d="M490.45,638.92c0,13-15.89,22.84-49.92,30.82-29,6.8-67.45,11.16-108.4,12.28q-10.39.29-20.55.28c-33.23,0-64-2.27-88.37-6.59-34.81-6.18-51.19-15.23-51.55-28.48-.29-10.56,10.11-19.15,31.79-26.26a284.31,284.31,0,0,1,40.3-9.43V596.41l11-2-11-1.08V569.91l14-2.2-14-1.31V543.07l53.63-7.69v-3.21l-2.5-1v-23h16.67l4,4.66.72-.66h5.84v-12h16.6l3,12.13h9.55l4.57-3.46,14.19.47v18.07L426,531v22l-13.81,2.16L426,556v22.26L415.5,580l10.5.74v21.77L414,605l12,.81V608c16.85,2.3,31,5.43,41.34,9.12,5.62,2,22.73,8.16,23.1,21.36C490.44,638.63,490.45,638.77,490.45,638.92Z" transform="translate(0 0)" onMouseEnter={() => mouseOn('camera', true)} onMouseLeave={() => mouseOn('camera', false)} onClick={() => goTo('camera')} />

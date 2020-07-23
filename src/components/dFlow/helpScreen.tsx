@@ -21,7 +21,7 @@ export default function HelpScreen(props: HelpScreenProps) {
         props.onHelped();
       }, 200);
     });
-  }, []);
+  }, [props]);
 
   return (
     <div className={`screen help ${visible ? '' : 'hide'}`} ref={rootRef}>

@@ -31,7 +31,7 @@ export default function LoadingScreen(props: LoadingScreenProps) {
     });
 
     loader.load();
-  }, []);
+  }, [props]);
 
   return (
     <div className="loading" style={{ display: visible ? 'flex' : 'none' }}>

@@ -1,4 +1,4 @@
-import React, { useState, useEffect } from 'react';
+import { useState, useEffect } from 'react';
 import { AssetInfo } from './assetInfo';
 
 export function useAssetSource(asset: AssetInfo) {
@@ -13,7 +13,7 @@ export function useAssetSource(asset: AssetInfo) {
     asset.addEventListenerOnce('load', () => {
       setSource(asset.source);
     });
-  }, []);
+  }, [asset]);
 
   return [source];
 }

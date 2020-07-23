@@ -93,12 +93,128 @@
       }
     }
 
-    svg {
+    .action-layer {
       @include full-box();
       @include position-top-left();
 
       polygon, rect, path {
         fill: rgba(0,0,0,.01);
+        cursor: pointer;
+      }
+    }
+  }
+
+  .chat {
+    width: 34%;
+    min-width: 480px;
+    margin: 40px;
+    background-color: rgba(0,0,0,.6);
+    display: flex;
+    z-index: 4;
+    flex-direction: column;
+    justify-content: stretch;
+    align-items: stretch;
+
+    .header {
+      height: 80px;
+      background-color: rgba(255, 255, 255, .4);
+      display: flex;
+      flex-direction: row;
+      justify-content: flex-start;
+      align-items: center;
+      padding: 8px 16px;
+
+      .avatar {
+        width: 64px;
+        height: 64px;
+        border-radius: 64px;
+        border: 2px solid rgba(0, 0, 0, .2);  
+      }
+
+      .promoter-name {
+        color: #ffffff;
+        font-size: 24px;
+        font-family: sans-serif;
+        margin-left: 14px;
+        flex-grow: 1;
+      }
+
+      .close {
+        width: 24px;
+        height: 24px;
+        align-self: flex-start;
+        margin-top: 8px;
+        cursor: pointer;
+
+        rect{
+          fill: rgba(255, 255, 255, .8);
+        }
+      }
+    }
+
+    .message-stack {
+      flex-grow: 1;
+      display: flex;
+      flex-direction: column;
+      overflow: auto;
+      padding-bottom: 18px;
+
+      .message-item {
+        color: #ffffff;
+        font-size: 14px;
+        padding: 14px;
+        font-family: sans-serif;
+        margin: 14px;
+        margin-bottom: 0;
+        max-width: 70%;
+        border-radius: 18px;
+
+        &.sender-promoter {
+          $sp-c1: rgba(0, 92, 38, .8);
+          $sp-c2: rgba(33,134,65, .8);
+          $sp-c3: rgba(94,162,87, .8);
+          background: $sp-c2;
+          background: linear-gradient(0deg, $sp-c1 0%, $sp-c2 50%, $sp-c3 100%);
+          color: #ffffff;
+          align-self: flex-start;
+          border-top-left-radius: 0;
+        }
+
+        &.sender-user {
+          $su-c1: rgba(150, 150, 150, 0.8);
+          $su-c2: rgba(200, 200, 200, 0.8);
+          $su-c3: rgba(255, 255, 255, 0.8);
+          background: $su-c2;
+          background: linear-gradient(0deg, $su-c1 0%, $su-c2 50%, $su-c3 100%);
+          color: #000000;
+          align-self: flex-end;
+          border-top-right-radius: 0;
+        }
+      }
+    }
+
+    .input-box {
+      background-color: rgba(255, 255, 255, .4);
+      display: flex;
+      flex-direction: row;
+      align-items: center;
+      padding: 10px;
+
+      .input {
+        justify-self: stretch;
+        flex-grow: 1;
+        height: 30px;
+        margin-right: 10px;
+        font-size: 16px;
+        padding: 4px 12px;
+        font-family: sans-serif;
+        outline: none;
+        min-width: 100px;
+      }
+
+      .icon {
+        width: 40px;
+        height: 40px;
         cursor: pointer;
       }
     }

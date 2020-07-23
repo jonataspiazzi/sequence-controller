@@ -16,6 +16,11 @@ export const assets = {
   layerTotemPromoterHighlight: new ImageInfo(require('./overlay-promoter.png'), 62118),
   layerTotemNotebookHighlight: new ImageInfo(require('./overlay-notebook.png'), 74385),
   layerCameraHelp: new ImageInfo(require('./camera-help-layer.png'), 129118),
+  layerNotebookHelp: new ImageInfo(require('./notebook-help-layer.png'), 97929),
+  layerNotebookScreen: new ImageInfo(require('./notebook-screen-layer.png'), 4998),
+  promoterAvatar: new ImageInfo(require('./promoter-avavatar.png'), 214336),
+  sendIcon: new ImageInfo(require('./send-icon.png'), 1629),
+  layerPromoterScreen: new ImageInfo(require('./promoter-screen.jpg'), 331792)
 };
 
 export const assetsList: AssetInfo[] = Object.getOwnPropertyNames(assets).map(prop => (assets as any)[prop]);

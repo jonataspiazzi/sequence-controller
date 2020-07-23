@@ -2,12 +2,12 @@ import React, { useState } from 'react';
 import { assets } from './assets/config';
 import { useAssetSource } from '../dFlow/hooks';
 
-export interface CameraHelpProps {
+export interface NotebookHelpProps {
   onClose: () => void;
 }
 
-export default function CameraHelp(props: CameraHelpProps) {
-  const [img] = useAssetSource(assets.layerCameraHelp);
+export default function NotebookHelp(props: NotebookHelpProps) {
+  const [img] = useAssetSource(assets.layerNotebookHelp);
   const [visible, setVisible] = useState(true);
 
   function onClose() {
@@ -21,10 +21,10 @@ export default function CameraHelp(props: CameraHelpProps) {
   }
 
   return (
-    <div className={`screen camera-help ${visible ? '' : 'hide'}`}>
+    <div className={`screen notebook-help ${visible ? '' : 'hide'}`}>
       <img className="background" alt="" src={img} />
       <svg viewBox="0 0 1280 720" className="action-layer">
-        <rect x="30" y="648.17" width="102.67" height="41.83" onClick={onClose} />
+        <rect x="30" y="647.39" width="135.25" height="42.61" onClick={onClose} />
       </svg>
     </div>
   );
