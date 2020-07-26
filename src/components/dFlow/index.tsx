@@ -2,7 +2,7 @@ import React, { ReactNode, useState } from 'react';
 import { AssetInfo, ImageInfo } from "./assetInfo";
 import LoadingScreen from "./loadingScreen";
 import SplashScreen from './splashScreen';
-import Flow from './flow';
+import DFlowBuffer from './flowBuffer';
 import './index.scss';
 import Visible from './visible';
 
@@ -29,7 +29,7 @@ export default function DFlow(props: DFlowProps) {
           <LoadingScreen assets={props.assets} onLoad={onLoad} />
         </Visible>
         <Visible visible={!loading}>
-          <Flow />
+          <DFlowBuffer />
           {props.children}
         </Visible>
       </div>

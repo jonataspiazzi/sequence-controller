@@ -2,7 +2,7 @@ import { AssetInfo, VideoInfo, ImageInfo } from "../../dFlow/assetInfo";
 
 export const assets = {
   frameInitial: new ImageInfo(require('./stand-splash.jpg'), 498332, 'image/jpg', 1),
-  video180: new VideoInfo(require('./stand-180.mp4'), 3478475),
+  video180: new VideoInfo(require('./stand-180.mp4'), 3478475, 49),
   videoCameraB: new VideoInfo(require('./stand-camera-b.mp4'), 6620145),
   videoCameraF: new VideoInfo(require('./stand-camera-f.mp4'), 6815145),
   videoNotebookB: new VideoInfo(require('./stand-notebook-b.mp4'), 3801815),

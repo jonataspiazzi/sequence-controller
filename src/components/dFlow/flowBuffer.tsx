@@ -1,18 +1,22 @@
 import React, { useEffect, useRef } from 'react';
 import { VideoInfo } from './assetInfo';
 import Notifier from './notifier';
+import FrameController from './frameController';
 
 export interface FlowControllerMap {
   ended: (id: BufferId) => void;
+  videoChanged: (video: VideoInfo) => void;
 }
 
 export type BufferId = 0 | 1;
 type BufferDictionary<T> = { [key in BufferId]: T };
 
-class FlowController extends Notifier<FlowControllerMap> {
+export class DFlowBufferController extends Notifier<FlowControllerMap> {
+  private currentAsset: VideoInfo = null;
   private currentBufferId = 1 as BufferId;
-  private buffers = {} as BufferDictionary<HTMLVideoElement>;
-  private readys = {} as BufferDictionary<Promise<void>>;
+  private readonly buffers = {} as BufferDictionary<HTMLVideoElement>;
+  private readonly readys = {} as BufferDictionary<Promise<void>>;
+  private readonly frames = new FrameController(this);
 
   private getNextBuffer() {
     return this.currentBufferId === 0 ? 1 : 0;
@@ -31,7 +35,9 @@ class FlowController extends Notifier<FlowControllerMap> {
     });
   }
 
-  setVideo(asset: VideoInfo) {
+  setVideo(video: VideoInfo) {
+    if (this.currentAsset?.assetId === video.assetId) return;
+
     const nextId = this.getNextBuffer();
 
     this.readys[nextId] = new Promise((resolve, reject) => {
@@ -44,8 +50,9 @@ class FlowController extends Notifier<FlowControllerMap> {
         reject();
       }, { once: true });
 
-      this.buffers[nextId].src = asset.source;
+      this.buffers[nextId].src = video.source;
       this.currentBufferId = nextId;
+      this.currentAsset = video;
     });
   }
 
@@ -62,17 +69,28 @@ class FlowController extends Notifier<FlowControllerMap> {
 
     this.buffers[this.currentBufferId].pause();
   }
+
+  /**
+   * Set a specific frame and force pause on video.
+   * @param alpha Alpha value to a linear interpolation on video duration.
+   * @param trusted If true the frame will be shown, if false frame can be replaced for others if `setFrame` was called before.
+   */
+  async setFrame(alpha: number, trusted: boolean = false) {
+    await this.readys[this.currentBufferId];
+
+    this.frames.push(alpha, this.currentAsset, this.buffers[this.currentBufferId], trusted);
+  }
 }
 
-export const flowController = new FlowController();
+export const flowBufferController = new DFlowBufferController();
 
-export default function Flow() {
+export default function DFlowBuffer() {
   const buff0Ref = useRef<HTMLVideoElement>(null);
   const buff1Ref = useRef<HTMLVideoElement>(null);
 
   useEffect(() => {
-    flowController.setBuffer(0, buff0Ref.current);
-    flowController.setBuffer(1, buff1Ref.current);
+    flowBufferController.setBuffer(0, buff0Ref.current);
+    flowBufferController.setBuffer(1, buff1Ref.current);
   }, []);
 
   return (
