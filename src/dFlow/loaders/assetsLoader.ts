@@ -1,6 +1,6 @@
-import Notifier from "./notifier";
-import { AssetInfo } from "./assetInfo";
-import { MINIMUM_PROGRESS_VALUE_DISPLAY } from "./config";
+import Notifier from "../helpers/notifier";
+import { AssetInfo } from "../dataModels/assetInfo";
+import { MINIMUM_PROGRESS_VALUE_DISPLAY } from "../helpers/config";
 
 export interface ProgressInfo {
   loaded: number;

@@ -1,4 +1,11 @@
-@import '../common/lib';
+@mixin user-select($value) {
+  -moz-user-select: $value; 
+  -khtml-user-select: $value; 
+  -webkit-user-select: $value; 
+  /* Introduced in IE 10. See http://ie.microsoft.com/testdrive/HTML5/msUserSelect/ */ 
+  -ms-user-select: $value;
+  user-select: $value;
+}
 
 @mixin sequencer-child($justify-content, $align-items, $flex-direction: row) {
   display: flex;

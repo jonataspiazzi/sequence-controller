@@ -15,5 +15,5 @@ app.get('*', (req: Request, res: Response) => {
 
 // OPEN SERVER
 app.listen(port, () => {
-  console.log(`server api started in http://localhost:${port}`);
+  console.info(`server api started in http://localhost:${port}`);
 });

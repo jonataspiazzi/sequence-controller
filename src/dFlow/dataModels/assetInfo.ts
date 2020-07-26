@@ -1,4 +1,4 @@
-import Notifier from "./notifier";
+import Notifier from "../helpers/notifier";
 
 export interface AssetInfoMap {
   load: () => void;

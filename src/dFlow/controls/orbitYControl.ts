@@ -1,5 +1,3 @@
-import { isatty } from "tty";
-
 type Coord = { readonly offsetX: number, readonly offsetY: number };
 type RotatorType = 'left' | 'right';
 
@@ -18,7 +16,6 @@ export function createRotator<T extends SVGElement>(element: T, type: RotatorTyp
 
   element.addEventListener('mousemove', (e: MouseEvent) => {
     if (isActing) {
-      console.log('acting');
     }
   });
 

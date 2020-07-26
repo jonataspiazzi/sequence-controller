@@ -1,6 +1,4 @@
-import { resolve } from "dns";
-
-export default class DMath {
+export class Interpolation {
   /**
    * Performs a linear interpolation between two values.
    * @param a A value 

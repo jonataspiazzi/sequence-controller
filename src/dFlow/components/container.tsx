@@ -1,9 +1,9 @@
 import React, { ReactNode, useState } from 'react';
-import { AssetInfo, ImageInfo } from "./assetInfo";
+import { AssetInfo, ImageInfo } from "../dataModels/assetInfo";
 import LoadingScreen from "./loadingScreen";
 import SplashScreen from './splashScreen';
-import DFlowBuffer from './flowBuffer';
-import './index.scss';
+import DFlowBuffer from './renderOutput';
+import './container.scss';
 import Visible from './visible';
 
 export interface DFlowProps {

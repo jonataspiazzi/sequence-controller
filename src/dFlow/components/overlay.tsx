@@ -1,6 +1,6 @@
 import React from 'react';
 import { useAssetSource } from './hooks';
-import { AssetInfo } from './assetInfo';
+import { AssetInfo } from '../dataModels/assetInfo';
 
 export interface OverlayProps {
   asset: AssetInfo;

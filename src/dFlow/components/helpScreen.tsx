@@ -1,5 +1,5 @@
 import React, { useEffect, useState, ReactNode, useRef } from 'react';
-import { ImageInfo } from './assetInfo';
+import { ImageInfo } from '../dataModels/assetInfo';
 import { useAssetSource } from './hooks';
 
 export interface HelpScreenProps {

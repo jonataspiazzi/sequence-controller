@@ -1,24 +1,28 @@
-import { DFlowBufferController } from "./flowBuffer";
-import Notifier from "./notifier";
-import { VideoInfo } from "./assetInfo";
-import DMath from "./math";
+import BufferControl from "./bufferControl";
+import { VideoInfo } from "../dataModels/assetInfo";
+import { Interpolation } from '../math/interpolation';
 
 export interface FrameInfo {
+  frameIndex: number;
   time: number;
   assetId: number;
   buffer: HTMLVideoElement;
   trusted: boolean;
 }
 
-export default class FrameController {
+function fToS(frame: FrameInfo) {
+  return `${frame.frameIndex}__t${frame.time.toFixed(3)}_${frame.trusted ? 'trusted' : 'untrusted'}`;
+}
+
+export default class FrameControl {
   private readonly frames: FrameInfo[] = [];
   private isExecuting: boolean = false;
 
-  constructor(parent: DFlowBufferController) {
-    parent.addEventListener('videoChanged', this.onVideoChanged.bind(this));
+  constructor(parent: BufferControl) {
+    parent.addEventListener('assetChanged', this.onAssetChanged.bind(this));
   }
 
-  private onVideoChanged(video: VideoInfo) {
+  private onAssetChanged(video: VideoInfo) {
     for (let i = 0; i < this.frames.length;) {
       if (this.frames[i].assetId !== video.assetId) {
         this.frames.splice(i, 1);
@@ -30,9 +34,9 @@ export default class FrameController {
     }
   }
 
-  private checkValidFrameTime(alpha: number, video: VideoInfo, buffer: HTMLVideoElement, trusted: boolean) {
-    let time = DMath.lerp(0, buffer.duration, alpha);
-    time = DMath.snapToggleToSegment(time, 0, buffer.duration, video.frameCount);
+  private validateFrameInfo(alpha: number, video: VideoInfo, buffer: HTMLVideoElement, trusted: boolean) {
+    let time = Interpolation.lerp(0, buffer.duration, alpha);
+    time = Interpolation.snapToggleToSegment(time, 0, buffer.duration, video.frameCount);
 
     const lastFrame = this.frames[this.frames.length - 1];
 
@@ -52,7 +56,11 @@ export default class FrameController {
       }
     }
 
-    return time;
+    const frameIndex = video.frameCount
+      ? Math.floor(time / (buffer.duration / video.frameCount))
+      : null;
+
+    return { frameIndex, time };
   }
 
   private getNextTrustedOrLast(index: number): FrameInfo {
@@ -66,6 +74,8 @@ export default class FrameController {
     // return the last frame if no trusted found.
     if (!next) return frame;
 
+    console.log(`skipping --| ${fToS(frame)}`);
+
     return next;
   }
 
@@ -77,6 +87,7 @@ export default class FrameController {
 
   private async executeFrames() {
     if (this.isExecuting) return;
+    this.isExecuting = true;
 
     while (true) {
       let frame = this.frames[0];
@@ -91,7 +102,11 @@ export default class FrameController {
       if (!frame.trusted) {
         const next = this.getNextTrustedOrLast(1);
 
-        if (next) frame = next;
+        if (next) {
+          console.log(`skipping --| ${fToS(frame)}`);
+
+          frame = next;
+        }
       }
 
       // updates the current frame.
@@ -110,6 +125,7 @@ export default class FrameController {
     });
 
     frame.buffer.currentTime = frame.time;
+    console.log(`updating >>> ${fToS(frame)}`);
 
     return promise;
   }
@@ -121,15 +137,15 @@ export default class FrameController {
    * @param buffer The buffer ready to be frame controlled.
    * @param trusted If true the frame will be shown, if false frame can be replaced for others if `setFrame` was called before.
    */
-  push(alpha: number, video: VideoInfo, buffer: HTMLVideoElement, trusted: boolean = false) {
-    const time = this.checkValidFrameTime(alpha, video, buffer, trusted);
+  async push(alpha: number, video: VideoInfo, buffer: HTMLVideoElement, trusted: boolean = false) {
+    const validation = this.validateFrameInfo(alpha, video, buffer, trusted);
 
-    if (!time) return;
+    if (!validation) return;
 
-    const frame = { time, assetId: video.assetId, buffer, trusted } as FrameInfo;
-
+    const { frameIndex, time } = validation;
+    const frame = { frameIndex, time, assetId: video.assetId, buffer, trusted } as FrameInfo;
     this.frames.push(frame);
 
-    this.executeFrames();
+    await this.executeFrames();
   }
 }

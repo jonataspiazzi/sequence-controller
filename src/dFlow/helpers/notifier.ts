@@ -1,5 +1,5 @@
 import { EventEmitter } from "events";
-import { GenericFunc } from "../common/globals";
+import { GenericFunc } from "../../common/globals";
 
 // This is a advanced type to mask the EventEmitter class
 export default class Notifier<T extends { [J in Extract<keyof T, string>]: GenericFunc }> {
@@ -9,11 +9,15 @@ export default class Notifier<T extends { [J in Extract<keyof T, string>]: Gener
     this.__emitter.addListener(event, listener);
   }
 
+  addEventListenerOnce<K extends Extract<keyof T, string>>(event: K, listener: T[K]): void {
+    this.__emitter.once(event, listener);
+  }
+
   removeEventListener<K extends Extract<keyof T, string>>(event: K, listener: T[K]): void {
     this.__emitter.removeListener(event, listener);
   };
 
-  protected emit<K extends Extract<keyof T, string>>(event: K, ...args: Parameters<T[K]>): void {
+  protected dispatchEvent<K extends Extract<keyof T, string>>(event: K, ...args: Parameters<T[K]>): void {
     this.__emitter.emit(event, ...args);
   }
 }

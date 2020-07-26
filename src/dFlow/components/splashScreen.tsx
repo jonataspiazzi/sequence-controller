@@ -1,5 +1,5 @@
 import React, { } from 'react';
-import { ImageInfo } from './assetInfo';
+import { ImageInfo } from '../dataModels/assetInfo';
 import { useAssetSource } from './hooks';
 
 export interface SplashScreenProps {

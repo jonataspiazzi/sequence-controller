@@ -1,11 +1,11 @@
 import React, { useState } from 'react';
-import DFlow from '../dFlow';
-import { flowBufferController } from '../dFlow/flowBuffer';
-import { assetsList, assets } from './assets/config';
-import HelpScreen from '../dFlow/helpScreen';
+import DFlow from '../../dFlow/components/container';
+import { bufferControl } from '../../dFlow/controls/bufferControl';
+import { assetsList, assets } from './assetsConfig';
+import HelpScreen from '../../dFlow/components/helpScreen';
 import TotemsScreen, { ScreenName } from './totemsScreen';
-import Visible from '../dFlow/visible';
-import CameraHelp from './cameraHelp';
+import Visible from '../../dFlow/components/visible';
+import CameraScreen from './cameraScreen';
 import NotebookHelp from './notebookHelp';
 import NotebookScreen from './notebookScreen';
 import PromoterScreen from './promoterScreen';
@@ -29,27 +29,27 @@ export default function NeonblueIndex() {
 
     switch (screen) {
       case 'camera':
-        flowBufferController.setVideo(assets.videoCameraF);
-        flowBufferController.addEventListenerOnce('ended', () => {
+        bufferControl.setVideo(assets.videoCameraF);
+        bufferControl.addEventListenerOnce('ended', () => {
           setCameraVisible(true);
         });
-        flowBufferController.play();
+        bufferControl.play();
         break;
 
       case 'notebook':
-        flowBufferController.setVideo(assets.videoNotebookF);
-        flowBufferController.addEventListenerOnce('ended', () => {
+        bufferControl.setVideo(assets.videoNotebookF);
+        bufferControl.addEventListenerOnce('ended', () => {
           setNotebookHelpVisible(true);
         });
-        flowBufferController.play();
+        bufferControl.play();
         break;
 
       case 'promoter':
-        flowBufferController.setVideo(assets.videoPromoterF);
-        flowBufferController.addEventListenerOnce('ended', () => {
+        bufferControl.setVideo(assets.videoPromoterF);
+        bufferControl.addEventListenerOnce('ended', () => {
           setPromoterVisible(true);
         });
-        flowBufferController.play();
+        bufferControl.play();
         break;
     }
   }
@@ -57,60 +57,60 @@ export default function NeonblueIndex() {
   function onCameraClosed() {
     setCameraVisible(false);
 
-    flowBufferController.setVideo(assets.videoCameraB);
-    flowBufferController.addEventListenerOnce('ended', () => {
+    bufferControl.setVideo(assets.videoCameraB);
+    bufferControl.addEventListenerOnce('ended', () => {
       setTotemVisible(true);
     });
-    flowBufferController.play();
+    bufferControl.play();
   }
 
   function onNotebookHelpClosed() {
     setNotebookHelpVisible(false);
 
-    flowBufferController.setVideo(assets.videoNotebookB);
-    flowBufferController.addEventListenerOnce('ended', () => {
+    bufferControl.setVideo(assets.videoNotebookB);
+    bufferControl.addEventListenerOnce('ended', () => {
       setTotemVisible(true);
     });
-    flowBufferController.play();
+    bufferControl.play();
   }
 
   function onNotebookScreenClosed() {
     setNotebookScreenVisible(false);
 
-    flowBufferController.setVideo(assets.videoNotebookB);
-    flowBufferController.addEventListenerOnce('ended', () => {
+    bufferControl.setVideo(assets.videoNotebookB);
+    bufferControl.addEventListenerOnce('ended', () => {
       setTotemVisible(true);
     });
-    flowBufferController.play();
+    bufferControl.play();
   }
 
   function onPromoterClosed() {
     setPromoterVisible(false);
 
-    flowBufferController.setVideo(assets.videoPromoterB);
-    flowBufferController.addEventListenerOnce('ended', () => {
+    bufferControl.setVideo(assets.videoPromoterB);
+    bufferControl.addEventListenerOnce('ended', () => {
       setTotemVisible(true);
     });
-    flowBufferController.play();
+    bufferControl.play();
   }
 
   return (
     <div className="container">
       <DFlow assets={assetsList} splash={assets.frameInitial}>
-        <Visible visible={false}>
+        <Visible visible={helpVisible}>
           <HelpScreen asset={assets.layerHelp} onHelped={finishHelp}>
             <svg viewBox="0 0 1280 720" className="action-layer">
               <rect className="ok-button" x="517.9" y="340" width="258.35" height="53.59" />
             </svg>
           </HelpScreen>
         </Visible>
-        <Visible visible={true}>
+        <Visible visible={totemVisible}>
           <TotemsScreen goTo={goTo} />
         </Visible>
         <Visible visible={cameraVisible}>
-          <CameraHelp onClose={onCameraClosed} />
+          <CameraScreen onClose={onCameraClosed} />
         </Visible>
-        <Visible visible={false}>
+        <Visible visible={notebookScreenVisible}>
           <NotebookScreen onClose={onNotebookScreenClosed} />
         </Visible>
         <Visible visible={promoterVisible}>

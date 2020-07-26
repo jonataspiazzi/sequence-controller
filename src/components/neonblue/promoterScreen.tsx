@@ -1,6 +1,6 @@
 import React, { useState, useRef, useEffect } from 'react';
-import { assets } from './assets/config';
-import { useAssetSource } from '../dFlow/hooks';
+import { assets } from './assetsConfig';
+import { useAssetSource } from '../../dFlow/components/hooks';
 
 export interface PromoterScreenProps {
   onClose: () => void;
@@ -91,7 +91,7 @@ export default function PromoterScreen(props: PromoterScreenProps) {
         </div>
         <div className="input-box">
           <input className="input" type="text" placeholder="Digite sua mensagem." value={message} onChange={e => setMessage(e.target.value)} onKeyDown={onKeyDown} />
-          <img className="icon" src={icon} onClick={sendMessage} />
+          <img className="icon" src={icon} onClick={sendMessage} alt="" />
         </div>
       </div>
     </div>

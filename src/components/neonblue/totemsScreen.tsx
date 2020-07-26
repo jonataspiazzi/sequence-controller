@@ -1,10 +1,7 @@
-import React, { useState, useEffect } from 'react';
-import { assets } from './assets/config';
-import { useAssetSource } from '../dFlow/hooks';
-import Overlay from '../dFlow/overlay';
-import { createRotator } from '../dFlow/rotatorController';
-import { flowBufferController } from '../dFlow/flowBuffer';
-import DMath from '../dFlow/math';
+import React, { useState } from 'react';
+import { assets } from './assetsConfig';
+import { useAssetSource } from '../../dFlow/components/hooks';
+import Overlay from '../../dFlow/components/overlay';
 
 export type ScreenName = 'camera' | 'promoter' | 'notebook';
 
@@ -20,19 +17,6 @@ export default function TotemsScreen(props: TotemsScreenProps) {
   const [highlightPromoter, setHighlightPromoter] = useState(false);
   const [highlightNotebook, setHighlightNotebook] = useState(false);
   const [visible, setVisible] = useState(true);
-
-  useEffect(() => {
-    flowBufferController.setVideo(assets.video180);
-
-    (async function () {
-      for (var i = 0; i < 1; i += (1 / 49)) {
-        await DMath.wait(500);
-        flowBufferController.setFrame(i);
-      }
-    })();
-
-
-  }, []);
 
   function mouseOn(totem: ScreenName, on: boolean) {
     switch (totem) {
@@ -51,6 +35,7 @@ export default function TotemsScreen(props: TotemsScreenProps) {
 
   return (
     <div className={`screen totem-screen ${visible ? '' : 'hide'}`}>
+      <img className="background" src={bg} alt="" />
       <Overlay asset={assets.layerTotemCameraHighlight} visible={highlightCamera} />
       <Overlay asset={assets.layerTotemPromoterHighlight} visible={highlightPromoter} />
       <Overlay asset={assets.layerTotemNotebookHighlight} visible={highlightNotebook} />

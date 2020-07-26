@@ -1,5 +1,5 @@
 import { useState, useEffect } from 'react';
-import { AssetInfo } from './assetInfo';
+import { AssetInfo } from '../dataModels/assetInfo';
 
 export function useAssetSource(asset: AssetInfo) {
   const [source, setSource] = useState<string>(null);

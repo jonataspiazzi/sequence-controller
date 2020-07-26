@@ -1,6 +1,6 @@
 import React, { useState } from 'react';
-import { assets } from './assets/config';
-import { useAssetSource } from '../dFlow/hooks';
+import { assets } from './assetsConfig';
+import { useAssetSource } from '../../dFlow/components/hooks';
 
 export interface NotebookHelpProps {
   onClose: () => void;

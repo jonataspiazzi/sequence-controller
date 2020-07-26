@@ -1,7 +1,7 @@
 import React, { useState, useEffect } from 'react';
-import { AssetInfo } from "./assetInfo";
-import AssetsLoader from "./assetsLoader";
-import { MINIMUM_PROGRESS_VALUE_DISPLAY } from "./config";
+import { AssetInfo } from "../dataModels/assetInfo";
+import AssetsLoader, { ProgressInfo } from "../loaders/assetsLoader";
+import { MINIMUM_PROGRESS_VALUE_DISPLAY } from "../helpers/config";
 
 export interface LoadingScreenProps {
   assets: AssetInfo[];
@@ -17,21 +17,33 @@ export default function LoadingScreen(props: LoadingScreenProps) {
 
     if (typeof props.onLoad !== 'function') return;
 
-    loader.addEventListener('load', priority => {
+    const onload = (priority: number) => {
       if (priority === 0) setVisible(false);
       props.onLoad(priority);
-    });
+    };
 
-    loader.addEventListener('error', e => {
-      // TODO: Do something of fail
-    });
-
-    loader.addEventListener('progress', ({ progress }) => {
+    const onprogress = ({ progress }: ProgressInfo) => {
       setPercentage(progress * 100);
-    });
+    };
 
+    const onerror = () => {
+      // TODO: Do something of fail
+      console.error('TODO: do something of fail');
+    };
+
+    loader.addEventListener('load', onload);
+    loader.addEventListener('error', onerror);
+    loader.addEventListener('progress', onprogress);
     loader.load();
+
+    return () => {
+      loader.removeEventListener('load', onload);
+      loader.removeEventListener('error', onerror);
+      loader.removeEventListener('progress', onprogress);
+    };
   }, [props]);
+
+
 
   return (
     <div className="loading" style={{ display: visible ? 'flex' : 'none' }}>
