@@ -73,7 +73,7 @@ export default class FrameControl {
     // return the last frame if no trusted found.
     if (!next) return frame;
 
-    console.log(`skipping --| ${fToS(frame)}`);
+    //console.log(`skipping --| ${fToS(frame)}`);
 
     return next;
   }

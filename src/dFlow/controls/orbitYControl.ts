@@ -79,9 +79,9 @@ export default class OrbitYControl<T extends SVGElement> {
     if (!this.isGoingBack) {
 
       this.currentFrameIndex = Math.floor(this.asset.frameCount / 2);
-      console.log('deu ruim', this.currentFrameIndex);
+      //console.log('deu ruim', this.currentFrameIndex);
     } else {
-      console.log('deu bom ', this.currentFrameIndex);
+      //console.log('deu bom ', this.currentFrameIndex);
     }
   }
 
@@ -143,7 +143,7 @@ export default class OrbitYControl<T extends SVGElement> {
       const frameIndex = Math.round(DMath.lerp(alpha, originFrameIndex, destFrameIndex));
       const frame = DMath.segmentCenter(frameIndex, this.asset.frameCount);
       this.currentFrameIndex = frame;
-      console.log('current frame index = ', this.currentFrameIndex);
+      //console.log('current frame index = ', this.currentFrameIndex);
 
       await bufferControl.setFrame(frame);
     }

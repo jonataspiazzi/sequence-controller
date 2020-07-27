@@ -12,8 +12,8 @@ import PromoterScreen from './promoterScreen';
 import './index.scss';
 
 export default function NeonblueIndex() {
-  const [helpVisible, setHelpVisible] = useState(false);
-  const [totemVisible, setTotemVisible] = useState(true);
+  const [helpVisible, setHelpVisible] = useState(true);
+  const [totemVisible, setTotemVisible] = useState(false);
   const [cameraVisible, setCameraVisible] = useState(false);
   const [notebookHelpVisible, setNotebookHelpVisible] = useState(false);
   const [notebookScreenVisible, setNotebookScreenVisible] = useState(false);
@@ -100,7 +100,7 @@ export default function NeonblueIndex() {
         <Visible visible={helpVisible}>
           <HelpScreen asset={assets.layerHelp} onHelped={finishHelp}>
             <svg viewBox="0 0 1280 720" className="action-layer">
-              <rect className="ok-button" x="517.9" y="340" width="258.35" height="53.59" />
+              <rect className="ok-button" x="513" y="340" width="264" height="49.67" />
             </svg>
           </HelpScreen>
         </Visible>

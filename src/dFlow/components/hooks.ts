@@ -28,7 +28,6 @@ export function useOrbitalX<T extends SVGElement>(asset: FrameSequenceInfo, left
     if (!node) return;
 
     obj.current = new OrbitYControl(node, asset, left, center, right);
-    console.log('ok');
   }, [asset, left, center, right]);
 
   //return [callback, obj];
