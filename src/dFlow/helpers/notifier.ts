@@ -1,5 +1,6 @@
-import { EventEmitter } from "events";
-import { GenericFunc } from "../../common/globals";
+import { EventEmitter } from 'events';
+
+type GenericFunc = (...args: any) => any;
 
 // This is a advanced type to mask the EventEmitter class
 export default class Notifier<T extends { [J in Extract<keyof T, string>]: GenericFunc }> {
