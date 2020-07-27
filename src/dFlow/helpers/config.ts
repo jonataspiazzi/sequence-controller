@@ -1,1 +1,4 @@
 export const MINIMUM_PROGRESS_VALUE_DISPLAY = .01;
+export const ORBIT_STANDARD_X_MOVEMENT_TICK = 5;
+export const ORBIT_MOVEMENT_WIDTH = .5; // 0 to 1
+export const ORBIT_ANIMATION_TIME = 300;

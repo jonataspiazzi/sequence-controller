@@ -19,3 +19,15 @@
     height: 100%;
   }
 }
+
+.cursor-left {
+  cursor: url('./assets/cursor-arrow-left.png'), auto !important;
+}
+
+.cursor-center {
+  cursor: e-resize !important;
+}
+
+.cursor-right {
+  cursor: url('./assets/cursor-arrow-right.png'), auto !important;
+}

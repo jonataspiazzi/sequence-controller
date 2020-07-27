@@ -7,7 +7,7 @@ export interface NotebookHelpProps {
 }
 
 export default function NotebookHelp(props: NotebookHelpProps) {
-  const [img] = useAssetSource(assets.layerNotebookHelp);
+  const img = useAssetSource(assets.layerNotebookHelp);
   const [visible, setVisible] = useState(true);
 
   function onClose() {

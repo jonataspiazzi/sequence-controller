@@ -7,7 +7,7 @@ export interface NotebookScreenProps {
 }
 
 export default function NotebookScreen(props: NotebookScreenProps) {
-  const [img] = useAssetSource(assets.layerNotebookScreen);
+  const img = useAssetSource(assets.layerNotebookScreen);
   const [visible, setVisible] = useState(true);
 
   function onClose() {

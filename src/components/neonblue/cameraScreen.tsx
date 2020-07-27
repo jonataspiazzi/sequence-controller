@@ -7,7 +7,7 @@ export interface CameraHelpProps {
 }
 
 export default function CameraHelp(props: CameraHelpProps) {
-  const [img] = useAssetSource(assets.layerCameraHelp);
+  const img = useAssetSource(assets.layerCameraHelp);
   const [visible, setVisible] = useState(true);
 
   function onClose() {

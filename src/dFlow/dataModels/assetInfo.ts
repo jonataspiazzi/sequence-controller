@@ -39,8 +39,14 @@ export class AssetInfo extends Notifier<AssetInfoMap> {
 }
 
 export class VideoInfo extends AssetInfo {
-  constructor(dataUrl: string, estimatedSize: number, readonly frameCount: number = 0) {
+  constructor(dataUrl: string, estimatedSize: number) {
     super(dataUrl, estimatedSize, 'video/mp4');
+  }
+}
+
+export class FrameSequenceInfo extends VideoInfo {
+  constructor(dataUrl: string, estimatedSize: number, readonly frameCount: number) {
+    super(dataUrl, estimatedSize);
   }
 }
 

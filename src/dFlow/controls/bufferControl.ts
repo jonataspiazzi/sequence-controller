@@ -34,12 +34,12 @@ export default class BufferControl extends Notifier<BufferControlMap> {
     });
   }
 
-  setVideo(video: AssetInfo) {
+  async setVideo(video: AssetInfo) {
     if (this.currentAsset?.assetId === video.assetId) return;
 
     const nextId = this.getNextBuffer();
 
-    this.readys[nextId] = new Promise((resolve, reject) => {
+    return this.readys[nextId] = new Promise((resolve, reject) => {
       this.buffers[nextId].addEventListener('canplay', () => {
         this.setIndex(nextId);
         resolve();

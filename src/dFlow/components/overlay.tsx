@@ -8,7 +8,7 @@ export interface OverlayProps {
 }
 
 export default function Overlay(props: OverlayProps) {
-  const [image] = useAssetSource(props.asset);
+  const image = useAssetSource(props.asset);
 
   return (
     <div className={`overlay ${props.visible ? 'show' : ''}`}>

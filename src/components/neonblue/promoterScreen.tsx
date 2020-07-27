@@ -39,8 +39,8 @@ const defaultMessages: MessageInfo[] = [{
 export default function PromoterScreen(props: PromoterScreenProps) {
   const messageStackRef = useRef<HTMLDivElement>(null);
   const [visible, setVisible] = useState(true);
-  const [avatar] = useAssetSource(assets.promoterAvatar);
-  const [icon] = useAssetSource(assets.sendIcon);
+  const avatar = useAssetSource(assets.promoterAvatar);
+  const icon = useAssetSource(assets.sendIcon);
   const [messages, setMessages] = useState<MessageInfo[]>(defaultMessages);
   const [message, setMessage] = useState('');
 

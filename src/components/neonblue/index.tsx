@@ -12,8 +12,8 @@ import PromoterScreen from './promoterScreen';
 import './index.scss';
 
 export default function NeonblueIndex() {
-  const [helpVisible, setHelpVisible] = useState(true);
-  const [totemVisible, setTotemVisible] = useState(false);
+  const [helpVisible, setHelpVisible] = useState(false);
+  const [totemVisible, setTotemVisible] = useState(true);
   const [cameraVisible, setCameraVisible] = useState(false);
   const [notebookHelpVisible, setNotebookHelpVisible] = useState(false);
   const [notebookScreenVisible, setNotebookScreenVisible] = useState(false);

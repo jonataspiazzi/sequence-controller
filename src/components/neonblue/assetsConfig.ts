@@ -1,8 +1,8 @@
-import { AssetInfo, VideoInfo, ImageInfo } from '../../dFlow/dataModels/assetInfo';
+import { AssetInfo, VideoInfo, ImageInfo, FrameSequenceInfo } from '../../dFlow/dataModels/assetInfo';
 
 export const assets = {
   frameInitial: new ImageInfo(require('./assets/stand-splash.jpg'), 498332, 'image/jpg', 1),
-  video180: new VideoInfo(require('./assets/stand-180.mp4'), 3478475, 49),
+  video180: new FrameSequenceInfo(require('./assets/stand-180.mp4'), 3478475, 49),
   videoCameraB: new VideoInfo(require('./assets/stand-camera-b.mp4'), 6620145),
   videoCameraF: new VideoInfo(require('./assets/stand-camera-f.mp4'), 6815145),
   videoNotebookB: new VideoInfo(require('./assets/stand-notebook-b.mp4'), 3801815),

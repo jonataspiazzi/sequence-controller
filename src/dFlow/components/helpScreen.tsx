@@ -9,9 +9,9 @@ export interface HelpScreenProps {
 }
 
 export default function HelpScreen(props: HelpScreenProps) {
-  const [img] = useAssetSource(props.asset);
-  const [visible, setVisible] = useState(true);
   const rootRef = useRef<HTMLDivElement>(null);
+  const img = useAssetSource(props.asset);
+  const [visible, setVisible] = useState(true);
 
   useEffect(() => {
     rootRef.current.querySelector('.ok-button').addEventListener('click', e => {

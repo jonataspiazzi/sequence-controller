@@ -1,6 +1,6 @@
 import BufferControl from "./bufferControl";
-import { VideoInfo } from "../dataModels/assetInfo";
-import { Interpolation } from '../math/interpolation';
+import { VideoInfo, FrameSequenceInfo } from "../dataModels/assetInfo";
+import { DMath } from '../helpers/dMath';
 
 export interface FrameInfo {
   frameIndex: number;
@@ -35,8 +35,9 @@ export default class FrameControl {
   }
 
   private validateFrameInfo(alpha: number, video: VideoInfo, buffer: HTMLVideoElement, trusted: boolean) {
-    let time = Interpolation.lerp(0, buffer.duration, alpha);
-    time = Interpolation.snapToggleToSegment(time, 0, buffer.duration, video.frameCount);
+    const frameCount = (video as FrameSequenceInfo).frameCount;
+    let time = DMath.lerp(alpha, 0, buffer.duration);
+    time = DMath.snapToggleToSegment(time, 0, buffer.duration, frameCount);
 
     const lastFrame = this.frames[this.frames.length - 1];
 
@@ -56,9 +57,7 @@ export default class FrameControl {
       }
     }
 
-    const frameIndex = video.frameCount
-      ? Math.floor(time / (buffer.duration / video.frameCount))
-      : null;
+    const frameIndex = frameCount ? Math.floor(time / (buffer.duration / frameCount)) : null;
 
     return { frameIndex, time };
   }
@@ -103,7 +102,7 @@ export default class FrameControl {
         const next = this.getNextTrustedOrLast(1);
 
         if (next) {
-          console.log(`skipping --| ${fToS(frame)}`);
+          //console.log(`skipping --| ${fToS(frame)}`);
 
           frame = next;
         }
@@ -125,7 +124,7 @@ export default class FrameControl {
     });
 
     frame.buffer.currentTime = frame.time;
-    console.log(`updating >>> ${fToS(frame)}`);
+    //console.log(`updating >>> ${fToS(frame)}`);
 
     return promise;
   }

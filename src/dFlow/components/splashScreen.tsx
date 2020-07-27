@@ -7,7 +7,7 @@ export interface SplashScreenProps {
 }
 
 export default function SplashScreen(props: SplashScreenProps) {
-  const [image] = useAssetSource(props.asset);
+  const image = useAssetSource(props.asset);
 
   return (
     <div className="splash">
