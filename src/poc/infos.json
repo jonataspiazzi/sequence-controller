@@ -1,0 +1,134 @@
+﻿[
+    {
+        "name": "cam",
+        "description": "",
+        "points": [
+            {
+                "type": "waypoint",
+                "name": "w_red",
+                "description": "",
+                "location": { "x": 49.37, "y": 192.98, "z": -17.95 }
+            },
+            {
+                "type": "waypoint",
+                "name": "w_green",
+                "description": "",
+                "location": { "x": -163.21, "y": 115.44, "z": -5.97 }
+            },
+            {
+                "type": "camera",
+                "name": "QuadCamera22",
+                "description": "",
+                "location": { "x": -156.16, "y": -116.41, "z": -45.43 }
+            },
+            {
+                "type": "camera",
+                "name": "QuadCamera27",
+                "description": "",
+                "location": { "x": -183.68, "y": 73.47, "z": -29.39 }
+            },
+            {
+                "type": "waypoint",
+                "name": "waypoint35",
+                "description": "",
+                "location": { "x": 71.52, "y": -185.56, "z": -21.26 }
+            },
+            {
+                "type": "camera",
+                "name": "QuadCamera23",
+                "description": "",
+                "location": { "x": 148.59, "y": -131.56, "z": -24.76 }
+            }
+        ]
+    },
+    {
+        "name": "QuadCamera27",
+        "description": "",
+        "points": [
+            {
+                "type": "camera",
+                "name": "cam",
+                "description": "",
+                "location": { "x": 183.68, "y": -73.47, "z": -29.39 }
+            },
+            {
+                "type": "waypoint",
+                "name": "w_green",
+                "description": "",
+                "location": { "x": 140.45, "y": 140.45, "z": -23.41 }
+            },
+            {
+                "type": "waypoint",
+                "name": "waypoint25",
+                "description": "",
+                "location": { "x": -173.65, "y": 99.23, "z": 0.00 }
+            },
+            {
+                "type": "camera",
+                "name": "QuadCamera22",
+                "description": "",
+                "location": { "x": 95.71, "y": -172.28, "z": -34.03 }
+            }
+        ]
+    },
+    {
+        "name": "QuadCamera23",
+        "description": "",
+        "points": [
+            {
+                "type": "waypoint",
+                "name": "waypoint35",
+                "description": "",
+                "location": { "x": -193.39, "y": -36.06, "z": -36.06 }
+            },
+            {
+                "type": "camera",
+                "name": "cam",
+                "description": "",
+                "location": { "x": -148.59, "y": 131.56, "z": -24.76 }
+            },
+            {
+                "type": "camera",
+                "name": "QuadCamera22",
+                "description": "",
+                "location": { "x": -191.03, "y": 55.66, "z": -20.24 }
+            }
+        ]
+    },
+    {
+        "name": "QuadCamera22",
+        "description": "",
+        "points": [
+            {
+                "type": "camera",
+                "name": "QuadCamera27",
+                "description": "",
+                "location": { "x": -95.71, "y": 172.28, "z": -34.03 }
+            },
+            {
+                "type": "waypoint",
+                "name": "w_green",
+                "description": "",
+                "location": { "x": -52.60, "y": 192.87, "z": -5.84 }
+            },
+            {
+                "type": "camera",
+                "name": "cam",
+                "description": "",
+                "location": { "x": 156.16, "y": 116.41, "z": -45.43 }
+            },
+            {
+                "type": "waypoint",
+                "name": "waypoint35",
+                "description": "",
+                "location": { "x": 170.77, "y": -102.09, "z": -20.42 }
+            },
+            {
+                "type": "camera",
+                "name": "QuadCamera23",
+                "description": "",
+                "location": { "x": 191.03, "y": -55.66, "z": -20.24 }
+            }
+        ]
+    }
+]

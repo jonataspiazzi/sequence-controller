@@ -1,12 +1,13 @@
 import React from 'react';
 import ReactDOM from 'react-dom';
-import NeonblueIndex from './components/neonblue/index';
+//import NeonblueIndex from './components/neonblue/index';
 import './index.scss';
+import Three from './poc/wrapper';
 import * as serviceWorker from './serviceWorker';
 
 ReactDOM.render(
   <React.StrictMode>
-    <NeonblueIndex />
+    <Three />
   </React.StrictMode>,
   document.getElementById('root')
 );
