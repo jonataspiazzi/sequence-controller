@@ -1,5 +1,11 @@
 import * as THREE from 'three/src/Three';
 import { PointerLockControls } from 'three/examples/jsm/controls/PointerLockControls';
+import { EffectComposer } from 'three/examples/jsm/postprocessing/EffectComposer';
+import { ShaderPass } from 'three/examples/jsm/postprocessing/ShaderPass';
+import { RenderPass } from 'three/examples/jsm/postprocessing/RenderPass';
+import { AfterimagePass } from 'three/examples/jsm/postprocessing/AfterimagePass';
+import { CubeTexturePass } from 'three/examples/jsm/postprocessing/CubeTexturePass';
+import { CopyShader } from 'three/examples/jsm/shaders/CopyShader';
 import spriteImg from './sprite.png';
 import sprite2Img from './sprite2.png';
 import infosRaw from './infos.json';
@@ -28,9 +34,9 @@ interface QuadCamInfo {
 type State = 'unlock' | 'lock' | 'hover';
 
 let currentSprites = [] as THREE.Sprite[];
-let currentInfo = null as QuadCamInfo;
 let currentState = null as State;
 let currentHover = undefined as THREE.Sprite;
+let currentEnableAfterPass = false;
 
 function setCurrentHover(sprite: THREE.Sprite) {
   if (currentHover === sprite) return;
@@ -146,24 +152,58 @@ export function setup(canvas: HTMLCanvasElement, arrowDiv: HTMLDivElement) {
 
   //scene.add(new THREE.HemisphereLight(0xaaaaaa, 0x444444));
 
-  //const light = new THREE.DirectionalLight(0xffffff, 0.5);
-  //light.position.set(1, 1, 1);
-  //scene.add(light);
+  const light = new THREE.DirectionalLight(0xffffff, 0.5);
+  light.position.set(1, 1, 1);
+  scene.add(light);
 
   // SKY BOX
 
-  function setCamera(info: QuadCamInfo) {
-    currentInfo = info;
 
+  //const iGlobeTex = 
+  //const iGlobeMat = 
+
+  //const sTex = new THREE.MeshBasicMaterial({ color: '#008800', transparent: true, opacity: 0 });
+  //const sGeo = new THREE.SphereBufferGeometry(.4, 12, 8);
+  //const sMesh = new THREE.Mesh(sGeo, sTex);
+  //sMesh.position.set(point.location.x, point.location.z, point.location.y);
+  //sMesh.position.normalize();
+  //sMesh.position.multiplyScalar(18);
+  //spheres.push(sMesh);
+  //
+  //scene.add(sMesh);
+
+  const sTex = new THREE.CubeTexture();
+  const sMat = new THREE.MeshBasicMaterial({ color: '#008800', map: sTex });
+  const sGeo = new THREE.SphereBufferGeometry(30, 12, 8);
+  const sMesh = new THREE.Mesh(sGeo, sMat);
+  sMesh.position.set(0, 0, 0);
+  sMesh.scale.set(-1, 1, 1);
+  scene.add(sMesh);
+
+  function setCamera(info: QuadCamInfo) {
     const names = ['negx', 'posx', 'posz', 'negz', 'posy', 'negy'];
     const imgs = names.map(name => require(`./${info.name}/${name}.png`));
+
+    currentEnableAfterPass = true;
 
     new THREE.CubeTextureLoader().load(imgs, cubeTexture => {
       scene.background = cubeTexture;
 
-      currentSprites.forEach(s => scene.remove(s));
-      currentSprites = [];
-      info.points.forEach(createSprite);
+      setTimeout(() => {
+        //sMat.map = cubeTexture;
+        //sMat.needsUpdate;
+
+        //sMat.map.copy(cubeTexture);
+        //sMat.needsUpdate = true;
+
+        currentSprites.forEach(s => scene.remove(s));
+        currentSprites = [];
+        info.points.forEach(createSprite);
+
+        setTimeout(() => {
+          currentEnableAfterPass = false;
+        }, 1000);
+      }, 200);
     });
   }
 
@@ -264,12 +304,37 @@ export function setup(canvas: HTMLCanvasElement, arrowDiv: HTMLDivElement) {
     setCamera(camera);
   });
 
+  // POSTPROCESSING
+
+  const composer = new EffectComposer(renderer);
+  const renderPass = new RenderPass(scene, camera)
+  composer.addPass(renderPass);
+
+  //var copyPass = new ShaderPass(CopyShader);
+  //composer.addPass(copyPass);
+
+  //const pisaUrls = ['px', 'nx', 'py', 'ny', 'pz', 'nz'].map(n => require(`./pisa/${n}.png`));
+  //new THREE.CubeTextureLoader().load(pisaUrls, cMap => {
+  //  const cubePass = new CubeTexturePass(camera, cMap, .5);
+  //  composer.insertPass(cubePass, 1);
+  //});
+
+  //const cubePass = new CubeTexturePass(camera,)
+
+  const afterImagePass = new AfterimagePass(.96);
+  composer.addPass(afterImagePass);
+
   const animate = function () {
     requestAnimationFrame(animate);
 
     onCast();
 
-    renderer.render(scene, camera);
+    if (currentEnableAfterPass && false) {
+      composer.render();
+    }
+    else {
+      renderer.render(scene, camera);
+    }
   };
 
   animate();
