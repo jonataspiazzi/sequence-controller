@@ -8,24 +8,41 @@ import { CubeTexturePass } from 'three/examples/jsm/postprocessing/CubeTexturePa
 import { CopyShader } from 'three/examples/jsm/shaders/CopyShader';
 import spriteImg from './sprite.png';
 import sprite2Img from './sprite2.png';
-import infosRaw from './infos.json';
+import infosRaw from './output/infos.json';
 
-const infos = infosRaw as QuadCamInfo[];
+const infos = infosRaw as GlobalInfo;
 
-interface Location {
+interface Vector3d {
   x: number;
   y: number;
   z: number;
+}
+
+interface TransformInfo {
+  location: Vector3d;
+  rotation: Vector3d;
+  scale: Vector3d;
+}
+
+interface GlobalInfo {
+  cams: Cam360Info[];
+  meshes: MeshInfo[];
+}
+
+interface MeshInfo {
+  fileName: string;
+  color: string;
+  transform: TransformInfo;
 }
 
 interface WaypointInfo {
   type: 'waypoint' | 'camera',
   name: string;
   description: string;
-  location: Location;
+  location: Vector3d;
 }
 
-interface QuadCamInfo {
+interface Cam360Info {
   name: string;
   description: string;
   points: WaypointInfo[];
@@ -98,7 +115,6 @@ export function setup(canvas: HTMLCanvasElement, arrowDiv: HTMLDivElement) {
   scene.add(controls.getObject());
 
   canvas.addEventListener('click', () => {
-    console.log('locked');
     controls.lock();
   });
 
@@ -180,11 +196,14 @@ export function setup(canvas: HTMLCanvasElement, arrowDiv: HTMLDivElement) {
   sMesh.scale.set(-1, 1, 1);
   scene.add(sMesh);
 
-  function setCamera(info: QuadCamInfo) {
+  function setCamera(info: Cam360Info) {
     const names = ['negx', 'posx', 'posz', 'negz', 'posy', 'negy'];
-    const imgs = names.map(name => require(`./${info.name}/${name}.png`));
+
+    const imgs = names.map(name => require(`./output/cams/${info.name}/${name}.png`));
 
     currentEnableAfterPass = true;
+
+    //controls.mo
 
     new THREE.CubeTextureLoader().load(imgs, cubeTexture => {
       scene.background = cubeTexture;
@@ -221,7 +240,7 @@ export function setup(canvas: HTMLCanvasElement, arrowDiv: HTMLDivElement) {
     currentSprites.push(sprite);
   }
 
-  setCamera(infos[0]);
+  setCamera(infos.cams[0]);
 
   /*
   new THREE.CubeTextureLoader().load(imgs, cubeTexture => {
@@ -299,7 +318,7 @@ export function setup(canvas: HTMLCanvasElement, arrowDiv: HTMLDivElement) {
 
     if (waypoint.type !== 'camera') return; // TODO
 
-    const camera = infos.find(i => i.name === waypoint.name);
+    const camera = infos.cams.find(i => i.name === waypoint.name);
 
     setCamera(camera);
   });

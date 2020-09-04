@@ -1,0 +1,446 @@
+﻿{
+    "cameras": [
+        {
+            "name": "cam360_1",
+            "description": "",
+            "location": {
+                "x": -351.93704223632813,
+                "y": 1079.80908203125,
+                "z": 20
+            },
+            "humanEyeHeight": 160,
+            "points": [
+                {
+                    "type": 1,
+                    "name": "cam360_2",
+                    "description": "",
+                    "location": {
+                        "x": -139.04241943359375,
+                        "y": -143.76092529296875,
+                        "z": 0
+                    }
+                },
+                {
+                    "type": 0,
+                    "name": "waypoint3",
+                    "description": "",
+                    "location": {
+                        "x": -196.92774963378906,
+                        "y": -26.416610717773438,
+                        "z": -22.839057922363281
+                    }
+                },
+                {
+                    "type": 1,
+                    "name": "cam360_7",
+                    "description": "",
+                    "location": {
+                        "x": 154.87074279785156,
+                        "y": -126.55061340332031,
+                        "z": 8.6932501289993525e-05
+                    }
+                }
+            ]
+        },
+        {
+            "name": "cam360_2",
+            "description": "",
+            "location": {
+                "x": -1114.8565673828125,
+                "y": 290.999267578125,
+                "z": 20
+            },
+            "humanEyeHeight": 160,
+            "points": [
+                {
+                    "type": 1,
+                    "name": "cam360_1",
+                    "description": "",
+                    "location": {
+                        "x": 139.04241943359375,
+                        "y": 143.76092529296875,
+                        "z": 0
+                    }
+                },
+                {
+                    "type": 0,
+                    "name": "waypoint3",
+                    "description": "",
+                    "location": {
+                        "x": -5.0328612327575684,
+                        "y": 198.21012878417969,
+                        "z": -26.218599319458008
+                    }
+                },
+                {
+                    "type": 1,
+                    "name": "cam360_6",
+                    "description": "",
+                    "location": {
+                        "x": 181.30610656738281,
+                        "y": -84.428054809570313,
+                        "z": 0
+                    }
+                },
+                {
+                    "type": 0,
+                    "name": "interaction17",
+                    "description": "",
+                    "location": {
+                        "x": -194.99786376953125,
+                        "y": -44.445545196533203,
+                        "z": 0.64856421947479248
+                    }
+                }
+            ]
+        },
+        {
+            "name": "cam360_6",
+            "description": "",
+            "location": {
+                "x": -230.19906616210938,
+                "y": -120.95545959472656,
+                "z": 20
+            },
+            "humanEyeHeight": 160,
+            "points": [
+                {
+                    "type": 1,
+                    "name": "cam360_2",
+                    "description": "",
+                    "location": {
+                        "x": -181.30610656738281,
+                        "y": 84.428054809570313,
+                        "z": 0
+                    }
+                },
+                {
+                    "type": 1,
+                    "name": "cam360_7",
+                    "description": "",
+                    "location": {
+                        "x": 174.85964965820313,
+                        "y": 97.077850341796875,
+                        "z": 0.00011304225336061791
+                    }
+                },
+                {
+                    "type": 0,
+                    "name": "interaction13",
+                    "description": "",
+                    "location": {
+                        "x": 181.16529846191406,
+                        "y": -84.649124145507813,
+                        "z": -3.6957495212554932
+                    }
+                },
+                {
+                    "type": 0,
+                    "name": "interaction15",
+                    "description": "",
+                    "location": {
+                        "x": -189.2799072265625,
+                        "y": -59.284603118896484,
+                        "z": -25.660335540771484
+                    }
+                },
+                {
+                    "type": 0,
+                    "name": "interaction31",
+                    "description": "",
+                    "location": {
+                        "x": -143.53721618652344,
+                        "y": -136.91360473632813,
+                        "z": 25.529020309448242
+                    }
+                }
+            ]
+        },
+        {
+            "name": "cam360_7",
+            "description": "",
+            "location": {
+                "x": 572.30596923828125,
+                "y": 324.575927734375,
+                "z": 20.000518798828125
+            },
+            "humanEyeHeight": 160,
+            "points": [
+                {
+                    "type": 1,
+                    "name": "cam360_6",
+                    "description": "",
+                    "location": {
+                        "x": -174.85964965820313,
+                        "y": -97.077850341796875,
+                        "z": -0.00011304225336061791
+                    }
+                },
+                {
+                    "type": 1,
+                    "name": "cam360_1",
+                    "description": "",
+                    "location": {
+                        "x": -154.87074279785156,
+                        "y": 126.55061340332031,
+                        "z": -8.6932501289993525e-05
+                    }
+                }
+            ]
+        }
+    ],
+    "meshes": [
+        {
+            "name": "ExportableMesh10",
+            "type": 0,
+            "fileName": "./meshes/GoldBlock.fbx",
+            "color": "rgba(25, 51, 255, 255)",
+            "location": {
+                "x": 1285.2017822265625,
+                "y": 364.08355712890625,
+                "z": 526.62158203125
+            },
+            "rotation": {
+                "x": 0,
+                "y": 0,
+                "z": -30.000070571899414
+            },
+            "scale": {
+                "x": 1,
+                "y": 1,
+                "z": 1
+            }
+        },
+        {
+            "name": "ExportableMesh11",
+            "type": 0,
+            "fileName": "./meshes/GoldBlock.fbx",
+            "color": "rgba(4, 106, 19, 255)",
+            "location": {
+                "x": 1005.0012817382813,
+                "y": 102.03220367431641,
+                "z": 248.724853515625
+            },
+            "rotation": {
+                "x": 0,
+                "y": 0,
+                "z": -110.00014495849609
+            },
+            "scale": {
+                "x": 1,
+                "y": 1,
+                "z": 1
+            }
+        },
+        {
+            "name": "ExportableMesh12",
+            "type": 0,
+            "fileName": "./meshes/CarLow.fbx",
+            "color": "rgba(25, 51, 255, 255)",
+            "location": {
+                "x": 208.5904541015625,
+                "y": -1494.9449462890625,
+                "z": 20
+            },
+            "rotation": {
+                "x": 0,
+                "y": 0,
+                "z": 0
+            },
+            "scale": {
+                "x": 1,
+                "y": 1,
+                "z": 1
+            }
+        },
+        {
+            "name": "ExportableMesh2",
+            "type": 0,
+            "fileName": "./meshes/CompainingCube.fbx",
+            "color": "rgba(53, 43, 39, 255)",
+            "location": {
+                "x": 272.40127563476563,
+                "y": -790.57855224609375,
+                "z": 19.99993896484375
+            },
+            "rotation": {
+                "x": 0,
+                "y": 0,
+                "z": 0
+            },
+            "scale": {
+                "x": 1,
+                "y": 1,
+                "z": 1
+            }
+        },
+        {
+            "name": "ExportableMesh3",
+            "type": 0,
+            "fileName": "./meshes/GoldBlock.fbx",
+            "color": "rgba(255, 11, 0, 255)",
+            "location": {
+                "x": 896.3675537109375,
+                "y": 105.91302490234375,
+                "z": 38.786544799804688
+            },
+            "rotation": {
+                "x": 0,
+                "y": 0,
+                "z": -60.000087738037109
+            },
+            "scale": {
+                "x": 1,
+                "y": 1,
+                "z": 1
+            }
+        },
+        {
+            "name": "ExportableMesh4",
+            "type": 0,
+            "fileName": "./meshes/GoldBlock.fbx",
+            "color": "rgba(255, 0, 127, 255)",
+            "location": {
+                "x": 949.4747314453125,
+                "y": 518.107421875,
+                "z": 38.786544799804688
+            },
+            "rotation": {
+                "x": 0,
+                "y": 0,
+                "z": -30.000070571899414
+            },
+            "scale": {
+                "x": 1,
+                "y": 1,
+                "z": 1
+            }
+        },
+        {
+            "name": "ExportableMesh5",
+            "type": 0,
+            "fileName": "./meshes/GoldBlock.fbx",
+            "color": "rgba(25, 51, 255, 255)",
+            "location": {
+                "x": 1337.59912109375,
+                "y": 450.22100830078125,
+                "z": 38.786544799804688
+            },
+            "rotation": {
+                "x": 0,
+                "y": 0,
+                "z": -30.000070571899414
+            },
+            "scale": {
+                "x": 1,
+                "y": 1,
+                "z": 1
+            }
+        },
+        {
+            "name": "ExportableMesh6",
+            "type": 0,
+            "fileName": "./meshes/GoldBlock.fbx",
+            "color": "rgba(25, 51, 255, 255)",
+            "location": {
+                "x": 1556.9803466796875,
+                "y": 154.48513793945313,
+                "z": 38.786544799804688
+            },
+            "rotation": {
+                "x": 0,
+                "y": 0,
+                "z": -110.00014495849609
+            },
+            "scale": {
+                "x": 1,
+                "y": 1,
+                "z": 1
+            }
+        },
+        {
+            "name": "ExportableMesh7",
+            "type": 0,
+            "fileName": "./meshes/GoldBlock.fbx",
+            "color": "rgba(25, 51, 255, 255)",
+            "location": {
+                "x": 1279.90576171875,
+                "y": -104.41891479492188,
+                "z": 38.786544799804688
+            },
+            "rotation": {
+                "x": 0,
+                "y": 0,
+                "z": -110.00014495849609
+            },
+            "scale": {
+                "x": 1,
+                "y": 1,
+                "z": 1
+            }
+        },
+        {
+            "name": "ExportableMesh8",
+            "type": 0,
+            "fileName": "./meshes/GoldBlock.fbx",
+            "color": "rgba(25, 51, 255, 255)",
+            "location": {
+                "x": 1620.3043212890625,
+                "y": 864.4581298828125,
+                "z": 38.786544799804688
+            },
+            "rotation": {
+                "x": 0,
+                "y": 0,
+                "z": -30.000070571899414
+            },
+            "scale": {
+                "x": 1,
+                "y": 1,
+                "z": 1
+            }
+        },
+        {
+            "name": "ExportableMesh9",
+            "type": 0,
+            "fileName": "./meshes/GoldBlock.fbx",
+            "color": "rgba(25, 51, 255, 255)",
+            "location": {
+                "x": 1247.94140625,
+                "y": 500.95120239257813,
+                "z": 526.62158203125
+            },
+            "rotation": {
+                "x": 0,
+                "y": 0,
+                "z": -30.000070571899414
+            },
+            "scale": {
+                "x": 1,
+                "y": 1,
+                "z": 1
+            }
+        },
+        {
+            "name": "ExportableMesh",
+            "type": 0,
+            "fileName": "./meshes/GoldBlock.fbx",
+            "color": "rgba(49, 44, 30, 255)",
+            "location": {
+                "x": -350.7978515625,
+                "y": -727.94451904296875,
+                "z": 20.00006103515625
+            },
+            "rotation": {
+                "x": 0,
+                "y": 0,
+                "z": 0
+            },
+            "scale": {
+                "x": 1,
+                "y": 1,
+                "z": 1
+            }
+        }
+    ]
+}
