@@ -1,10 +1,9 @@
-import React, { useEffect, useState, ReactNode, useRef } from 'react';
+import React, { useState, useRef } from 'react';
 import { ImageInfo } from '../dataModels/assetInfo';
 import { useAssetSource } from './hooks';
 
 export interface HelpScreenProps {
   asset: ImageInfo;
-  children: ReactNode;
   onHelped: () => void;
 }
 
@@ -13,20 +12,17 @@ export default function HelpScreen(props: HelpScreenProps) {
   const img = useAssetSource(props.asset);
   const [visible, setVisible] = useState(true);
 
-  useEffect(() => {
-    rootRef.current.querySelector('.ok-button').addEventListener('click', e => {
-      setVisible(false);
+  function onClose() {
+    setVisible(false);
 
-      setTimeout(() => {
-        props.onHelped();
-      }, 200);
-    });
-  }, [props]);
+    setTimeout(() => {
+      props.onHelped();
+    }, 200);
+  }
 
   return (
-    <div className={`screen help ${visible ? '' : 'hide'}`} ref={rootRef}>
+    <div className={`screen help ${visible ? '' : 'hide'}`} ref={rootRef} onClick={onClose}>
       <img className="background" alt="" src={img} />
-      {props.children}
     </div>
   );
 }

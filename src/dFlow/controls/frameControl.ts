@@ -10,10 +10,6 @@ export interface FrameInfo {
   trusted: boolean;
 }
 
-function fToS(frame: FrameInfo) {
-  return `${frame.frameIndex}__t${frame.time.toFixed(3)}_${frame.trusted ? 'trusted' : 'untrusted'}`;
-}
-
 export default class FrameControl {
   private readonly frames: FrameInfo[] = [];
   private isExecuting: boolean = false;

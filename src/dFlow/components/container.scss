@@ -37,8 +37,6 @@
   height: 45vw;
   @include user-select(none);
 
-  
-
   .loading {
     @include sequencer-child(flex-end, flex-start, column);
     
