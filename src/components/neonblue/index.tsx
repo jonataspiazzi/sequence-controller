@@ -98,11 +98,7 @@ export default function NeonblueIndex() {
     <div className="container">
       <DFlow assets={assetsList} splash={assets.frameInitial}>
         <Visible visible={helpVisible}>
-          <HelpScreen asset={assets.layerHelp} onHelped={finishHelp}>
-            <svg viewBox="0 0 1280 720" className="action-layer">
-              <rect className="ok-button" x="513" y="340" width="264" height="49.67" />
-            </svg>
-          </HelpScreen>
+          <HelpScreen asset={assets.layerHelp} onHelped={finishHelp} />
         </Visible>
         <Visible visible={totemVisible}>
           <TotemsScreen goTo={goTo} />
