@@ -55,3 +55,9 @@ export class ImageInfo extends AssetInfo {
     super(dataUrl, estimatedSize, type, priority);
   }
 }
+
+export class AudioInfo extends AssetInfo {
+  constructor(dataUrl: string, estimatedSize: number, priority: number = 0) {
+    super(dataUrl, estimatedSize, 'audio/mpeg', priority);
+  }
+}

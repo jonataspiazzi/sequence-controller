@@ -7,7 +7,7 @@ const files = fs.readdirSync(dir);
 let output = '';
 
 output += `
-import { AssetInfo, VideoInfo, ImageInfo, FrameSequenceInfo } from '../../dFlow/dataModels/assetInfo';
+import { AssetInfo, AudioInfo, VideoInfo, ImageInfo, FrameSequenceInfo } from '../../dFlow/dataModels/assetInfo';
 
 export const assets = {
 `;
@@ -35,6 +35,10 @@ for (const file of files) {
       break;
     case '.png':
       className = 'ImageInfo';
+      mime = '';
+      break;
+    case '.mp3':
+      className = 'AudioInfo';
       mime = '';
       break;
   }

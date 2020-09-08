@@ -224,4 +224,28 @@
       }
     }
   }
+
+  .tool-bar {
+    position: absolute;
+    bottom: 0;
+    right: 0;
+    width: 100%;
+    display: flex;
+    justify-content: flex-end;
+    align-items: center;
+    z-index: 200;
+    margin: 1vw;
+    cursor: pointer;
+
+    .tool-bar-button {
+      width: 2vw;
+      height: 2vw;
+      display: block;
+
+      img {
+        width: 2vw;
+        height: 2vw;
+      }
+    }
+  }
 }

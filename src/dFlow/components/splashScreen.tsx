@@ -1,4 +1,4 @@
-import React, { } from 'react';
+import React from 'react';
 import { ImageInfo } from '../dataModels/assetInfo';
 import { useAssetSource } from './hooks';
 

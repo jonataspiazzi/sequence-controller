@@ -32,3 +32,38 @@ export function useOrbitalX<T extends SVGElement>(asset: FrameSequenceInfo, left
 
   //return [callback, obj];
 }
+
+
+export interface Size2d {
+  width: number;
+  height: number;
+}
+
+/**
+ * Window Size
+ */
+export function useWindowSize() {
+  // https://usehooks.com/useWindowSize/
+
+  const [windowSize, setWindowSize] = useState<Size2d>({
+    width: undefined,
+    height: undefined,
+  });
+
+  useEffect(() => {
+    function handleResize() {
+      setWindowSize({
+        width: window.innerWidth,
+        height: window.innerHeight,
+      });
+    }
+
+    window.addEventListener("resize", handleResize);
+
+    handleResize();
+
+    return () => window.removeEventListener("resize", handleResize);
+  }, []);
+
+  return windowSize;
+}

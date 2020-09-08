@@ -53,9 +53,9 @@ export default function SlideShow(props: SlideShowProps) {
           <img key={index} src={src} className={`item ${index !== props.slide ? 'hide' : ''}`} alt="" />
         )}
       </div>
-      <img src={left} alt="" className="left-buttom" onClick={onLeft} />
-      <img src={right} alt="" className="right-buttom" onClick={onRight} />
-      <img src={close} alt="" className="close-buttom" onClick={props.onClose} />
+      <img src={left} alt="" className="left-button" onClick={onLeft} />
+      <img src={right} alt="" className="right-button" onClick={onRight} />
+      <img src={close} alt="" className="close-button" onClick={props.onClose} />
     </div>
   );
 }

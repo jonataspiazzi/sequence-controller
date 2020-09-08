@@ -1,4 +1,4 @@
-import React, { useState } from 'react';
+import React, { useState, useRef, useEffect } from 'react';
 import { bufferControl } from '../../dFlow/controls/bufferControl';
 import { assetsList, assets } from './assetsConfig';
 import DFlow from '../../dFlow/components/container';
@@ -8,17 +8,24 @@ import InitialScreen, { ScreenName } from './initialScreen';
 import LiveScreen from './liveScreen';
 import PromoterScreen from './promoterScreen';
 import TotemScreen from './totemScreen';
+import ToolBar from '../../dFlow/components/toolBar';
+import AudioButton from '../../dFlow/components/audioButton';
 import './index.scss';
+import { audioControls } from '../../dFlow/controls/audioControls';
 
 export default function DreamHouseIndex() {
+  const dFlowRef = useRef<HTMLDivElement>(null);
   const [helpVisible, setHelpVisible] = useState(true);
   const [initialVisible, setInitialVisible] = useState(false);
   const [liveVisible, setLiveVisible] = useState(false);
   const [promoterVisible, setPromoterVisible] = useState(false);
   const [totemVisible, setTotemVisible] = useState(false);
+  const [toolBarVisible, setToolBarVisible] = useState(false);
 
   function finishHelp() {
     setHelpVisible(false);
+    setToolBarVisible(true);
+    audioControls.setAudio(assets.loungeMusic);
     bufferControl.setVideo(assets.entrance);
     bufferControl.addEventListenerOnce('ended', () => {
       setInitialVisible(true);
@@ -34,6 +41,8 @@ export default function DreamHouseIndex() {
         bufferControl.setVideo(assets.live);
         bufferControl.addEventListenerOnce('ended', () => {
           setLiveVisible(true);
+          setToolBarVisible(false);
+          audioControls.disableAudio();
         });
         bufferControl.play();
         break;
@@ -57,6 +66,8 @@ export default function DreamHouseIndex() {
   function finishLive() {
     setLiveVisible(false);
     setInitialVisible(true);
+    setToolBarVisible(true);
+    audioControls.enableAudio();
   }
 
   function finishPromoter() {
@@ -80,24 +91,26 @@ export default function DreamHouseIndex() {
   }
 
   return (
-    <div className="container">
-      <DFlow assets={assetsList} splash={assets.loading}>
-        <Visible visible={helpVisible}>
-          <HelpScreen asset={assets.instrucoes} onHelped={finishHelp} />
-        </Visible>
-        <Visible visible={initialVisible}>
-          <InitialScreen goTo={goTo} />
-        </Visible>
-        <Visible visible={liveVisible}>
-          <LiveScreen onClose={finishLive} />
-        </Visible>
-        <Visible visible={promoterVisible}>
-          <PromoterScreen onClose={finishPromoter} />
-        </Visible>
-        <Visible visible={totemVisible}>
-          <TotemScreen onClose={finishTotem} />
-        </Visible>
-      </DFlow>
-    </div >
+    <DFlow assets={assetsList} splash={assets.loading} ref={dFlowRef}>
+      <Visible visible={helpVisible}>
+        <HelpScreen asset={assets.instrucoes} onHelped={finishHelp} />
+      </Visible>
+      <Visible visible={initialVisible}>
+        <InitialScreen goTo={goTo} />
+      </Visible>
+      <Visible visible={liveVisible}>
+        <LiveScreen onClose={finishLive} />
+      </Visible>
+      <Visible visible={promoterVisible}>
+        <PromoterScreen onClose={finishPromoter} />
+      </Visible>
+      <Visible visible={totemVisible}>
+        <TotemScreen onClose={finishTotem} />
+      </Visible>
+      <ToolBar visible={toolBarVisible}>
+        <AudioButton />
+        {/*<FullscreenButtom container={dFlowRef} />*/}
+      </ToolBar>
+    </DFlow>
   );
 }
